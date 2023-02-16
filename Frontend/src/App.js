@@ -1,5 +1,5 @@
 import "./App.css";
-import Container from "./components/Container/Container";
+// import Container from "./components/Container/Container";
 import NoteForm from "./components/NoteForm/NoteForm";
 import NoteList from "./components/NoteList/NoteList";
 import { useState } from "react";
@@ -31,20 +31,19 @@ function App() {
       setNoteToUpdate(note);
       notes.splice(selectedNoteIdx, 1);
       setNotes([...notes]);
-      console.log(notes);
     }
   };
 
   return (
-    <div className="">
-      <Container>
-        <NoteForm submit={handleNoteSubmit} noteToUpdate={noteToUpdate} />
-        <NoteList
-          notes={notes}
-          deleteNote={handleNoteDelete}
-          update={handleNoteUpdate}
-        />
-      </Container>
+    <div className="App">
+      {/* <Container> */}
+      <NoteForm submit={handleNoteSubmit} noteToUpdate={noteToUpdate} />
+      <NoteList
+        notes={notes}
+        deleteNote={handleNoteDelete}
+        update={handleNoteUpdate}
+      />
+      {/* </Container> */}
     </div>
   );
 }

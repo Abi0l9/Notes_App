@@ -27,7 +27,7 @@ const NoteForm = ({ submit, noteToUpdate }) => {
 
   return (
     <div className="noteForm">
-      <h1>Notes Form goes here.</h1>
+      <h3>Create your desired note</h3>
       <form onSubmit={submitNote}>
         <div>
           <label htmlFor="title">Title</label>
