@@ -32,7 +32,28 @@ noteRouter
     const noteId = request.params.noteId;
     const note = await Note.findByIdAndUpdate(noteId, request.body);
 
-    return response.status(200).json({ message: "Edited Successfully" }).end();
+    if (note) {
+      return response
+        .status(200)
+        .json({ message: "Edited Successfully" })
+        .end();
+    } else {
+      return response.status(404).json({ message: "Note not found" }).end();
+    }
+  })
+
+  .delete("/:noteId", async (request, response) => {
+    const noteId = request.params.noteId;
+    const note = await Note.findByIdAndRemove(noteId);
+
+    if (note) {
+      return response
+        .status(200)
+        .json({ message: "Deleted Successfully" })
+        .end();
+    } else {
+      return response.status(404).json({ message: "Note not found" }).end();
+    }
   });
 
 module.exports = noteRouter;
