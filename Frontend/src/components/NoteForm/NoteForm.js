@@ -1,15 +1,28 @@
 import "./NoteForm.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const NoteForm = ({ submit }) => {
+const NoteForm = ({ submit, noteToUpdate }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const updateBtnRef = useRef("");
+
+  const newUpdate = noteToUpdate[0];
+
+  useEffect(() => {
+    if (noteToUpdate) {
+      updateBtnRef.current.textContent = "Update";
+      setTitle(newUpdate.title);
+      setContent(newUpdate.content);
+    }
+  }, [newUpdate?.title, newUpdate?.content, noteToUpdate]);
 
   const submitNote = (e) => {
     e.preventDefault();
     submit({ title, content });
     setTitle("");
-    setContent("")
+    setContent("");
+    updateBtnRef.current.textContent = "Submit";
   };
 
   return (
@@ -23,6 +36,8 @@ const NoteForm = ({ submit }) => {
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            minLength="5"
+            required
           />
         </div>
         <div>
@@ -32,10 +47,14 @@ const NoteForm = ({ submit }) => {
             name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            min="15"
+            required
           ></textarea>
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" ref={updateBtnRef}>
+            Submit
+          </button>
         </div>
       </form>
     </div>
