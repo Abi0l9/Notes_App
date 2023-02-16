@@ -20,6 +20,7 @@ app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
+app.use(middleware.userExtractor);
 app.use("/api/notes", noteRouter);
 app.get("", (request, response) => response.json({ message: "works well" }));
 

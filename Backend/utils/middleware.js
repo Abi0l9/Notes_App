@@ -22,8 +22,10 @@ const tokenExtractor = (request, response, next) => {
 
 const userExtractor = (request, response, next) => {
   const token = request.token;
-  const verifyToken = jwt.verify(token, process.env.SECRET);
+  const verifyToken = jwt.verify(request.token, process.env.SECRET);
   request.user = verifyToken.id;
+
+  next();
 };
 
 module.exports = { requestLogger, tokenExtractor, userExtractor };

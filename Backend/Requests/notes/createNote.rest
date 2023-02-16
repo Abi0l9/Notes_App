@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9sYSIsImlkIjoiNjNlZGQzN2ZjMDEyMWQ4YTdkNmZjNWY0IiwiaWF0IjoxNjc2NTM0MTk5LCJleHAiOjE2NzY1NDQ5OTl9.QR45mDDiVbwjjNIs8Xr-C_u4RG2QqlymgXpbSGkrxXM
+
+{
+    "title":"first note",
+    "body":"Body of the first note"
+}
