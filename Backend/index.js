@@ -18,12 +18,15 @@ app.use(express.json());
 
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
+
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
+
+//only this route requires authentication and permission
 app.use(middleware.userExtractor);
 app.use("/api/notes", noteRouter);
-app.get("", (request, response) => response.json({ message: "works well" }));
 
+app.use(middleware.errorHandler);
 app.listen(config.PORT, () => {
   console.log("listening to port", config.PORT);
 });

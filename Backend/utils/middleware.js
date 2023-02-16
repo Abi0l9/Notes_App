@@ -11,6 +11,16 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
+const errorHandler = (error, request, response, next) => {
+  if (error.name === "JsonWebTokenError") {
+    return response.status(401).json({
+      message: "Authentication needed...invalid token/ token is missing",
+    });
+  }
+
+  next(error);
+};
+
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
@@ -28,4 +38,4 @@ const userExtractor = (request, response, next) => {
   next();
 };
 
-module.exports = { requestLogger, tokenExtractor, userExtractor };
+module.exports = { requestLogger, tokenExtractor, userExtractor, errorHandler };
