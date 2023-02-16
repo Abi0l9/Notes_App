@@ -14,11 +14,16 @@ function App() {
     setNotes(notes.concat(obj));
   };
 
+  const handleNoteDelete = (id) => {
+    notes.splice(id, 1)
+    setNotes([...notes]);
+  };
+
   return (
     <div className="">
       <Container>
-        <NoteForm submit={handleNoteSubmit}/>
-        <NoteList notes={notes} />
+        <NoteForm submit={handleNoteSubmit} />
+        <NoteList notes={notes} deleteNote={handleNoteDelete}/>
       </Container>
     </div>
   );
