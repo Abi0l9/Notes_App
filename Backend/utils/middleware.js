@@ -5,7 +5,6 @@ const requestLogger = (request, response, next) => {
   } else {
     console.log(log, request.body);
   }
-  console.log(request);
 
   next();
 };

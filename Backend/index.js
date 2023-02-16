@@ -15,7 +15,7 @@ mongoose
 app.use(express.json());
 
 app.use(middleware.requestLogger);
-app.use("api/users", userRouter);
+app.use("/api/users", userRouter);
 app.get("", (request, response) => response.json({ message: "works well" }));
 
 app.listen(config.PORT, () => {
