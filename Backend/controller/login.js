@@ -31,7 +31,6 @@ loginRoute.post("", async (request, response) => {
 
   const message = {
     username,
-    id: user._id,
     token,
   };
 
