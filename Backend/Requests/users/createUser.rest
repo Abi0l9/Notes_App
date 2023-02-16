@@ -2,8 +2,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-    "name":"ola",
-    "email":"ola@ola.com",
-    "username":"ola",
+    "name":"dev",
+    "email":"dev@dev.com",
+    "username":"dev",
     "password":"root"
 }

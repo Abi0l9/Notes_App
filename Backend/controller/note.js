@@ -5,8 +5,11 @@ const Note = require("../models/note");
 noteRouter
   .get("", async (request, response) => {
     const notes = await Note.find({}).populate("user", { name: 1 });
+    const retrievedNotes = notes.filter(
+      (note) => note.user.id === request.user
+    );
 
-    return response.status(200).json(notes).end();
+    return response.status(200).json(retrievedNotes).end();
   })
 
   .post("", async (request, response) => {
@@ -30,29 +33,45 @@ noteRouter
 
   .patch("/:noteId", async (request, response) => {
     const noteId = request.params.noteId;
-    const note = await Note.findByIdAndUpdate(noteId, request.body);
+    const note = await Note.findById(noteId);
 
-    if (note) {
+    if (!note) {
+      return response.status(404).json({ message: "Note not found" }).end();
+    }
+
+    if (note.user.toString() === request.user) {
+      await Note.findByIdAndUpdate(noteId, request.body);
       return response
         .status(200)
         .json({ message: "Edited Successfully" })
         .end();
     } else {
-      return response.status(404).json({ message: "Note not found" }).end();
+      return response
+        .status(403)
+        .json({ message: "You have no permission to edit this note" })
+        .end();
     }
   })
 
   .delete("/:noteId", async (request, response) => {
     const noteId = request.params.noteId;
-    const note = await Note.findByIdAndRemove(noteId);
+    const note = await Note.findById(noteId);
 
-    if (note) {
+    if (!note) {
+      return response.status(404).json({ message: "Note not found" }).end();
+    }
+
+    if (note.user.toString() === request.user) {
+      await Note.findByIdAndRemove(noteId);
       return response
         .status(200)
         .json({ message: "Deleted Successfully" })
         .end();
     } else {
-      return response.status(404).json({ message: "Note not found" }).end();
+      return response
+        .status(403)
+        .json({ message: "You have no permission to edit this note" })
+        .end();
     }
   });
 
