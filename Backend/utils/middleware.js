@@ -3,7 +3,7 @@ const requestLogger = (request, response, next) => {
   if (Object.keys(request.body).length === 0) {
     console.log(log);
   } else {
-    console.log(log, request.body);
+    console.log(log, "---", request.body);
   }
 
   next();
