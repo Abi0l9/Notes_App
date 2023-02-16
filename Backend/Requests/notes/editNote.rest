@@ -1,8 +1,8 @@
-POST http://localhost:3001/api/notes
-Content-Type: application/json
+PATCH  http://localhost:3001/api/notes/63ede9545b509209c8ad3ee1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9sYSIsImlkIjoiNjNlZGQzN2ZjMDEyMWQ4YTdkNmZjNWY0IiwiaWF0IjoxNjc2NTM0MTk5LCJleHAiOjE2NzY1NDQ5OTl9.QR45mDDiVbwjjNIs8Xr-C_u4RG2QqlymgXpbSGkrxXM
+Content-Type: application/json
 
 {
-    "title":"third note",
-    "body":"Body of the third note"
+    "title":"edited title",
+    "body":"edited body too"
 }
