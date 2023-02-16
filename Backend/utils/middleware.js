@@ -12,9 +12,14 @@ const requestLogger = (request, response, next) => {
 };
 
 const errorHandler = (error, request, response, next) => {
+  console.log(error.name);
   if (error.name === "JsonWebTokenError") {
     return response.status(401).json({
-      message: "Authentication needed...invalid token/ token is missing",
+      error: "Authentication needed...invalid token/ token is missing",
+    });
+  } else if (error.name === "ValidationError") {
+    return response.status(400).json({
+      error: "Invalid Data",
     });
   }
 
