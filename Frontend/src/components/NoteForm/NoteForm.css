@@ -1,3 +1,7 @@
 .noteForm {
   background-color: "";
 }
+
+label {
+  display: block;
+}

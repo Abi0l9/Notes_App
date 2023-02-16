@@ -2,13 +2,23 @@ import "./App.css";
 import Container from "./components/Container/Container";
 import NoteForm from "./components/NoteForm/NoteForm";
 import NoteList from "./components/NoteList/NoteList";
+import { useState } from "react";
 
 function App() {
+  const [notes, setNotes] = useState([
+    { title: "first note", content: "first content" },
+    { title: "second note", content: "second content" },
+  ]);
+
+  const handleNoteSubmit = (obj) => {
+    setNotes(notes.concat(obj));
+  };
+
   return (
     <div className="">
       <Container>
-        <NoteForm />
-        <NoteList />
+        <NoteForm submit={handleNoteSubmit}/>
+        <NoteList notes={notes} />
       </Container>
     </div>
   );
