@@ -23,9 +23,9 @@ const NoteForm = ({ submit, noteToUpdate }) => {
     setTitle("");
     setContent("");
     updateBtnRef.current.textContent = "Submit";
-    if ((updateBtnRef.current.textContent = "Update")) {
-      noteToUpdate.length = 0;
-    }
+    // if ((updateBtnRef.current.textContent = "Update")) {
+    //   noteToUpdate.length = 0;
+    // }
   };
 
   return (
