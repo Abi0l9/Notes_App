@@ -12,8 +12,8 @@ const NoteForm = ({ submit, noteToUpdate }) => {
   useEffect(() => {
     if (noteToUpdate) {
       updateBtnRef.current.textContent = "Update";
-      setTitle(newUpdate.title);
-      setContent(newUpdate.content);
+      setTitle(newUpdate?.title || "");
+      setContent(newUpdate?.content || "");
     }
   }, [newUpdate?.title, newUpdate?.content, noteToUpdate]);
 
@@ -23,6 +23,9 @@ const NoteForm = ({ submit, noteToUpdate }) => {
     setTitle("");
     setContent("");
     updateBtnRef.current.textContent = "Submit";
+    if ((updateBtnRef.current.textContent = "Update")) {
+      noteToUpdate.length = 0;
+    }
   };
 
   return (
