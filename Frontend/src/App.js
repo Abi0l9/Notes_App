@@ -30,19 +30,24 @@ function App() {
     }
   }, []);
 
-  const handleNoteSubmit = (obj) => {
-    setNotes((notes = notes.concat(obj)));
-    services.createNote(obj);
+  const handleNoteSubmit = async (obj) => {
+    const newNote = await services.createNote(obj);
+    setNotes((notes = notes.concat(newNote)));
     noteToUpdate = "";
   };
 
-  const handleNoteDelete = (id) => {
-    notes.splice(id, 1);
-    setNotes([...notes]);
+  const handleNoteDelete = (id, noteId) => {
+    try {
+      notes.splice(id, 1);
+      setNotes([...notes]);
+      services.deleteNote(noteId);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const handleNoteUpdate = (noteIdx) => {
-    const note = notes.filter((note, id) => id === noteIdx);
+    const note = notes.filter((_note, id) => id === noteIdx);
     if (note) {
       const noteId = note[0].id;
       const selectedNoteIdx = notes.findIndex(
@@ -61,9 +66,7 @@ function App() {
   const handleUserLogin = async (obj) => {
     const request = await services.handleLogin(obj);
     try {
-      // const { token } = request;
-      // services.setToken(token);
-      // setUser(request);
+      setUser(request);
       window.sessionStorage.setItem("user", JSON.stringify(request));
     } catch (error) {
       console.log(error.message);

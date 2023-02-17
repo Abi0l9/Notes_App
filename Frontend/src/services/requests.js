@@ -26,17 +26,6 @@ const handleLogin = async (obj) => {
   return request.data;
 };
 
-const retrieveNotes = async () => {
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-
-  const request = await axios.get(noteUrl, config);
-  return request.data;
-};
-
 const createNote = async (obj) => {
   const config = {
     headers: {
@@ -48,5 +37,37 @@ const createNote = async (obj) => {
   return request.data;
 };
 
+const retrieveNotes = async () => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = await axios.get(noteUrl, config);
+  return request.data;
+};
+
+const updateNote = (obj) => {};
+
+const deleteNote = async (id) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  const request = await axios.delete(`${noteUrl}/${id}`, config);
+  return request.data;
+};
+
 // eslint-disable-next-line
-export default { handleLogin, setToken, handleReg, retrieveNotes, createNote };
+export default {
+  handleLogin,
+  setToken,
+  handleReg,
+  createNote,
+  retrieveNotes,
+  updateNote,
+  deleteNote,
+};

@@ -11,7 +11,9 @@ const NoteList = ({ notes, deleteNote, update }) => {
                 <b>{note.title}</b>
                 <p>{note.content}</p>
                 <div id="btnArea">
-                  <button onClick={() => deleteNote(idx)}>delete</button>{" "}
+                  <button onClick={() => deleteNote(idx, note.id)}>
+                    delete
+                  </button>{" "}
                   <button onClick={() => update(idx)}>edit</button>
                 </div>
               </div>
