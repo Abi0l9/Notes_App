@@ -14,7 +14,7 @@ const NoteList = ({ notes, deleteNote, update }) => {
                   <button onClick={() => deleteNote(idx, note.id)}>
                     delete
                   </button>{" "}
-                  <button onClick={() => update(idx)}>edit</button>
+                  <button onClick={() => update(idx, note.id)}>edit</button>
                 </div>
               </div>
               <hr />

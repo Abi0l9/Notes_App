@@ -46,16 +46,25 @@ function App() {
     }
   };
 
-  const handleNoteUpdate = (noteIdx) => {
+  const handleNoteUpdate = async (noteIdx, noteToDeleteId) => {
     const note = notes.filter((_note, id) => id === noteIdx);
     if (note) {
-      const noteId = note[0].id;
-      const selectedNoteIdx = notes.findIndex(
-        (selected) => selected.id === noteId
-      );
-      setNoteToUpdate(note);
-      notes.splice(selectedNoteIdx, 1);
-      setNotes([...notes]);
+      try {
+        const noteId = note[0].id;
+        const selectedNoteIdx = notes.findIndex(
+          (selected) => selected.id === noteId
+        );
+        setNoteToUpdate(note);
+        // const request = await services.updateNote(noteToDeleteId);
+        // console.log(request);
+
+        notes.splice(selectedNoteIdx, 1);
+        services.deleteNote(noteToDeleteId);
+
+        setNotes([...notes]);
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   };
 
