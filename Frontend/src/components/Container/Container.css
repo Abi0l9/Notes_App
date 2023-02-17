@@ -1,10 +1,41 @@
-/* .container {
+.container {
   margin: 0 auto;
   padding: 1rem;
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  
-  flex: 1;
-  gap: 1rem;
-} */
+  background-color: beige;
+  width: 80%;
+  border-radius: 10px;
+}
+
+button {
+  border: 0 solid white;
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+}
+
+hr {
+  width: 50vw;
+}
+
+#deleteBtn {
+  background-color: red;
+  color: white;
+  margin-right: 8px;
+}
+
+#editBtn {
+  background-color: green;
+  color: white;
+}
+
+#deleteBtn:active {
+  background-color: maroon;
+}
+
+#editBtn:active {
+  background-color: yellowgreen;
+}
+
+#deleteBtn:hover {
+  background-color: red;
+}

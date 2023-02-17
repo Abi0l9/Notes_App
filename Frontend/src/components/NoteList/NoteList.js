@@ -3,7 +3,7 @@ import "./NoteList.css";
 const NoteList = ({ notes, deleteNote, update }) => {
   return (
     <div className="container">
-      <h1>Notes</h1>
+      <h1>List of created notes</h1>
       {notes.length > 0
         ? notes.map((note, idx) => (
             <div key={idx}>
@@ -11,10 +11,15 @@ const NoteList = ({ notes, deleteNote, update }) => {
                 <b>{note.title}</b>
                 <p>{note.content}</p>
                 <div id="btnArea">
-                  <button onClick={() => deleteNote(idx, note.id)}>
+                  <button
+                    id="deleteBtn"
+                    onClick={() => deleteNote(idx, note.id)}
+                  >
                     delete
                   </button>{" "}
-                  <button onClick={() => update(idx, note.id)}>edit</button>
+                  <button id="editBtn" onClick={() => update(idx, note.id)}>
+                    edit
+                  </button>
                 </div>
               </div>
               <hr />

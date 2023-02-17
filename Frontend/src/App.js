@@ -10,16 +10,21 @@ function App() {
   let [notes, setNotes] = useState([]);
   let [noteToUpdate, setNoteToUpdate] = useState("");
   const [user, setUser] = useState("");
+  const [activeUserName, setActiveUserName] = useState("");
 
   useEffect(() => {
     if (user) {
-      services.retrieveNotes().then((data) => setNotes(data));
+      services.retrieveNotes().then((data) => {
+        setNotes(data);
+        setActiveUserName(data[0].user.name);
+      });
     }
   }, [user]);
 
-  useEffect(() => {
-    console.log(notes);
-  });
+  // useEffect(() => {
+  //   console.log(notes);
+  //   console.log(activeUserName);
+  // });
 
   useEffect(() => {
     const activeUser = window.sessionStorage.getItem("user");
@@ -76,14 +81,20 @@ function App() {
     const request = await services.handleLogin(obj);
     try {
       setUser(request);
+      services.setToken(request.token);
       window.sessionStorage.setItem("user", JSON.stringify(request));
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  const handleLogout = () => {
+    window.sessionStorage.clear();
+    setUser("");
+  };
+
   return (
-    <div className="">
+    <div className="App">
       {!user ? (
         <div>
           <BrowserRouter>
@@ -117,9 +128,11 @@ function App() {
       ) : (
         <div>
           <Container
+            userName={activeUserName}
             submit={handleNoteSubmit}
             noteToUpdate={noteToUpdate}
             notes={notes}
+            logout={handleLogout}
             deleteNote={handleNoteDelete}
             update={handleNoteUpdate}
           />
