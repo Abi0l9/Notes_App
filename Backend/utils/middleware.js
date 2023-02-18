@@ -25,6 +25,10 @@ const errorHandler = (error, request, response, next) => {
   next(error);
 };
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: "page not found!" });
+};
+
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer")) {
@@ -42,4 +46,10 @@ const userExtractor = (request, response, next) => {
   next();
 };
 
-module.exports = { requestLogger, tokenExtractor, userExtractor, errorHandler };
+module.exports = {
+  requestLogger,
+  unknownEndpoint,
+  tokenExtractor,
+  userExtractor,
+  errorHandler,
+};

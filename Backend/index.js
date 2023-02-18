@@ -7,6 +7,7 @@ const middleware = require("./utils/middleware");
 const noteRouter = require("./controller/note");
 const userRouter = require("./controller/user");
 const loginRouter = require("./controller/login");
+const path = require("path");
 
 const mongoose = require("mongoose");
 
@@ -17,13 +18,23 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use(cors());
+app.use(express.static("build"));
 app.use(express.json());
 
 app.use(middleware.requestLogger);
-app.use(middleware.tokenExtractor);
 
+app.use(middleware.tokenExtractor);
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
+
+// routes to handle static pages from the frontend
+app.get("/register", (request, response) => {
+  response.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.get("/login", (request, response) => {
+  response.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 //only this route requires authentication and permission
 app.use(middleware.userExtractor);
