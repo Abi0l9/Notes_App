@@ -1,10 +1,12 @@
 const config = require("./utils/config");
 const express = require("express");
+require("express-async-errors");
 const app = express();
+const cors = require("cors");
+const middleware = require("./utils/middleware");
+const noteRouter = require("./controller/note");
 const userRouter = require("./controller/user");
 const loginRouter = require("./controller/login");
-const noteRouter = require("./controller/note");
-const middleware = require("./utils/middleware");
 
 const mongoose = require("mongoose");
 
@@ -14,6 +16,7 @@ mongoose
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.error(err));
 
+app.use(cors());
 app.use(express.json());
 
 app.use(middleware.requestLogger);

@@ -22,6 +22,7 @@ loginRoute.post("", async (request, response) => {
   const userDetails = {
     username: user.username,
     id: user._id,
+    name: user.name
   };
 
   const token = jwt.sign(userDetails, process.env.SECRET, {

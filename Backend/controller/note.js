@@ -13,12 +13,12 @@ noteRouter
   })
 
   .post("", async (request, response) => {
-    const { title, body } = request.body;
+    const { title, content } = request.body;
     const user = await User.findById(request.user);
 
     const note = new Note({
       title,
-      body,
+      content,
       date: new Date().toUTCString(),
       user: user._id,
     });
@@ -28,7 +28,7 @@ noteRouter
     user.notes = user.notes.concat(note.id);
     await user.save();
 
-    return response.status(201).json(note);
+    return response.status(201).json(savedNote);
   })
 
   .patch("/:noteId", async (request, response) => {
