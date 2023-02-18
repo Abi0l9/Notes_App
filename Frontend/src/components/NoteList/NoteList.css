@@ -1,9 +1,14 @@
-.container {
-  background-color: "";
-}
+/* * {
+  margin: 0;
+} */
 
 #btnArea {
   width: 20%;
   display: flex;
   justify-content: space-between;
+}
+
+#list {
+  padding: 0;
+  margin: 0;
 }

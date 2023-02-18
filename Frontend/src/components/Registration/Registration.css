@@ -1,0 +1,50 @@
+#reg-page {
+  margin: 3rem auto;
+  text-align: center;
+  height: 400px;
+}
+
+#reg-form {
+  background-color: lightblue;
+  margin: 1rem auto;
+  padding: 0.5rem 0;
+  width: 250px;
+  border-radius: 0.3rem;
+}
+
+button {
+  background-color: darkslategray;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+button:focus {
+  background-color: teal;
+}
+
+#old-user {
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+  background-color: white;
+  padding: 0.2rem 0.5rem;
+  margin: 0.2rem;
+  border-radius: 0.2rem;
+  color: teal;
+}
+
+a:active {
+  background-color: darkblue;
+  color: white;
+}
+
+a:hover {
+  background-color: lightseagreen;
+  color: white;
+}
+
+#old-user > div {
+  margin-top: 5px;
+}

@@ -1,8 +1,5 @@
 .App {
-  /* display: flex;
-  justify-content: center; */
-  /* gap: 25px; */
-  background-color: lightsteelblue;
+  height: 100vh;
 }
 
 .App-logo {
@@ -36,6 +33,39 @@
     transform: rotate(0deg);
   }
   to {
+    transform: rotate(360deg);
+  }
+}
+
+#loader {
+  display: inline;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 40%;
+  right: 45%;
+
+  /* background-color: red; */
+}
+
+#loader::after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: blue transparent blue transparent;
+  animation: loader 1s linear infinite;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
     transform: rotate(360deg);
   }
 }

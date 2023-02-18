@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Registration.css";
 
 const Registration = ({ register }) => {
   const [name, setName] = useState("");
@@ -18,9 +19,10 @@ const Registration = ({ register }) => {
   };
 
   return (
-    <div>
+    <div id="reg-page">
       <h1>Registration Page</h1>
-      <form onSubmit={handleSubmit}>
+
+      <form id="reg-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Full name:</label>
           <input
@@ -71,6 +73,12 @@ const Registration = ({ register }) => {
         </div>
         <div>
           <button type="submit">Sign Up</button>
+        </div>
+        <div id="old-user">
+          Already have an account?{" "}
+          <div>
+            Click<a href="/login"> here</a> to log in!{" "}
+          </div>
         </div>
       </form>
     </div>

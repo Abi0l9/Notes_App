@@ -23,6 +23,7 @@ const NoteForm = ({ submit, noteToUpdate }) => {
     setTitle("");
     setContent("");
     updateBtnRef.current.textContent = "Submit";
+    console.log(newUpdate);
   };
 
   return (
@@ -41,7 +42,7 @@ const NoteForm = ({ submit, noteToUpdate }) => {
           />
         </div>
         <div>
-          <label htmlFor="body">Content</label>
+          <label htmlFor="content">Content</label>
           <textarea
             id="content"
             name="content"

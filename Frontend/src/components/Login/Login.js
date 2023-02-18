@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Login.css";
 
 const Login = ({ login }) => {
   const [username, setUsername] = useState("");
@@ -14,9 +15,9 @@ const Login = ({ login }) => {
   };
 
   return (
-    <div>
+    <div id="login-page">
       <h1>Login Page</h1>
-      <div>
+      <div id="form">
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username:</label>
@@ -44,6 +45,9 @@ const Login = ({ login }) => {
             <button type="submit">Login</button>
           </div>
         </form>
+        <div id="new-user">
+          New user? Sign Up<a href="/register"> here</a>!
+        </div>
       </div>
     </div>
   );

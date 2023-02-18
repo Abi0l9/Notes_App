@@ -12,14 +12,24 @@ const Container = ({
   userName,
 }) => {
   return (
-    <div>
-      <h1>Notes</h1>
-      <p>
-        Welcome back, {userName} <button onClick={logout}>Logout</button>
-      </p>
-      <div className="container">
-        <NoteForm submit={submit} noteToUpdate={noteToUpdate} />
-        <NoteList notes={notes} deleteNote={deleteNote} update={update} />
+    <div id="user-page">
+      <div id="user-info">
+        <h1>Notes</h1>
+        <p>
+          Welcome back, <b color="black">{userName}</b>{" "}
+          <button onClick={logout}>Logout</button>
+        </p>
+      </div>
+      <div id="container">
+        <div id="content-body">
+          <NoteForm submit={submit} noteToUpdate={noteToUpdate} />
+          <NoteList
+            id="note-list"
+            notes={notes}
+            deleteNote={deleteNote}
+            update={update}
+          />
+        </div>
       </div>
     </div>
   );

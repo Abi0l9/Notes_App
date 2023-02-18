@@ -3,12 +3,12 @@ import "./NoteList.css";
 const NoteList = ({ notes, deleteNote, update }) => {
   return (
     <div className="container">
-      <h1>List of created notes</h1>
+      <h3>List of created notes</h3>
       {notes.length > 0
         ? notes.map((note, idx) => (
-            <div key={idx}>
+            <div id="list" key={idx}>
               <div>
-                <b>{note.title}</b>
+                <h4>{note.title}</h4>
                 <p>{note.content}</p>
                 <div id="btnArea">
                   <button
