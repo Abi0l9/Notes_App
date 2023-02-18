@@ -26,9 +26,8 @@ const handleReg = async (obj) => {
 };
 
 const handleLogin = async (obj) => {
-  const config = configHandler(token);
 
-  const request = await axios.post(loginUrl, obj, config);
+  const request = await axios.post(loginUrl, obj);
   return request.data;
 };
 

@@ -2,6 +2,11 @@
   margin: 0;
 } */
 
+#noteContainer {
+  height: 400px;
+  overflow-y: scroll;
+}
+
 #btnArea {
   width: 20%;
   display: flex;
@@ -11,4 +16,9 @@
 #list {
   padding: 0;
   margin: 0;
+}
+
+.date {
+  font-size: small;
+  color: darkslateblue;
 }

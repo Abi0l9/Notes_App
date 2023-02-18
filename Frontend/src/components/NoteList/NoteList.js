@@ -1,8 +1,9 @@
 import "./NoteList.css";
 
 const NoteList = ({ notes, deleteNote, update }) => {
+  console.log(notes);
   return (
-    <div className="container">
+    <div id="noteContainer">
       <h3>List of created notes</h3>
       {notes.length > 0
         ? notes.map((note, idx) => (
@@ -10,6 +11,7 @@ const NoteList = ({ notes, deleteNote, update }) => {
               <div>
                 <h4>{note.title}</h4>
                 <p>{note.content}</p>
+                <p className="date">{note.date}</p>
                 <div id="btnArea">
                   <button
                     id="deleteBtn"

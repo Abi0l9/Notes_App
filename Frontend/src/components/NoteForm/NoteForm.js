@@ -23,7 +23,6 @@ const NoteForm = ({ submit, noteToUpdate }) => {
     setTitle("");
     setContent("");
     updateBtnRef.current.textContent = "Submit";
-    console.log(newUpdate);
   };
 
   return (
