@@ -23,6 +23,10 @@ app.use(express.json());
 
 app.use(middleware.requestLogger);
 
+app.get("", (request, response) => {
+  return response.status(200).json({message: "Welocome to Notes App Homepage"})
+});
+
 app.use(middleware.tokenExtractor);
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
