@@ -28,12 +28,8 @@ app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
 
 // routes to handle static pages from the frontend
-app.get("/register", (request, response) => {
-  response.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-app.get("/login", (request, response) => {
-  response.sendFile(path.join(__dirname, "build", "index.html"));
+app.get("/*", (request, response) => {
+  response.status(404).json({ error: "Invalid route" });
 });
 
 //only this route requires authentication and permission
