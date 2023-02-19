@@ -1,9 +1,10 @@
 const noteRouter = require("express").Router();
 const User = require("../models/user");
 const Note = require("../models/note");
+const middleware = require("../utils/middleware");
 
 noteRouter
-  .get("", async (request, response) => {
+  .get("", middleware.userExtractor, async (request, response) => {
     const notes = await Note.find({}).populate("user", { name: 1 });
     const retrievedNotes = notes.filter(
       (note) => note.user.id === request.user
@@ -12,7 +13,25 @@ noteRouter
     return response.status(200).json(retrievedNotes).end();
   })
 
-  .post("", async (request, response) => {
+  .get("/:noteId", middleware.userExtractor, async (request, response) => {
+    const noteId = request.params.noteId;
+    const note = await Note.findById(noteId);
+
+    if (!note) {
+      return response.status(404).json({ message: "Note not found" }).end();
+    }
+
+    if (note.user.toString() === request.user) {
+      return response.status(200).json({ note: note }).end();
+    } else {
+      return response
+        .status(403)
+        .json({ message: "You have no permission to view this note" })
+        .end();
+    }
+  })
+
+  .post("", middleware.userExtractor, async (request, response) => {
     const { title, content } = request.body;
     const user = await User.findById(request.user);
 
@@ -31,7 +50,7 @@ noteRouter
     return response.status(201).json(savedNote);
   })
 
-  .patch("/:noteId", async (request, response) => {
+  .patch("/:noteId", middleware.userExtractor, async (request, response) => {
     const noteId = request.params.noteId;
     const note = await Note.findById(noteId);
 
@@ -53,7 +72,7 @@ noteRouter
     }
   })
 
-  .delete("/:noteId", async (request, response) => {
+  .delete("/:noteId", middleware.userExtractor, async (request, response) => {
     const noteId = request.params.noteId;
     const note = await Note.findById(noteId);
 
@@ -70,7 +89,7 @@ noteRouter
     } else {
       return response
         .status(403)
-        .json({ message: "You have no permission to edit this note" })
+        .json({ message: "You have no permission to delete this note" })
         .end();
     }
   });
