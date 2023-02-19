@@ -7,9 +7,9 @@ const Login = ({ login }) => {
 
   const obj = { username, password };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(obj);
+    await login(obj);
     setUsername("");
     setPassword("");
   };

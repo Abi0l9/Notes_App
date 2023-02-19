@@ -3,8 +3,9 @@
 } */
 
 #noteContainer {
-  height: 400px;
+  height: 300px;
   overflow-y: scroll;
+  word-wrap: break-word;
 }
 
 #btnArea {

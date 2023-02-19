@@ -1,7 +1,6 @@
 import "./NoteList.css";
 
 const NoteList = ({ notes, deleteNote, update }) => {
-  console.log(notes);
   return (
     <div id="noteContainer">
       <h3>List of created notes</h3>
@@ -17,10 +16,10 @@ const NoteList = ({ notes, deleteNote, update }) => {
                     id="deleteBtn"
                     onClick={() => deleteNote(idx, note.id)}
                   >
-                    delete
+                    ❌
                   </button>{" "}
                   <button id="editBtn" onClick={() => update(idx, note.id)}>
-                    edit
+                    🖊
                   </button>
                 </div>
               </div>

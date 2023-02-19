@@ -1,7 +1,7 @@
 import "./App.css";
 import Container from "./components/Container/Container";
-import { useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
 import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login";
 import services from "./services/requests";
@@ -12,7 +12,19 @@ function App() {
   let [noteToUpdate, setNoteToUpdate] = useState("");
   const [user, setUser] = useState("");
   const [activeUserName, setActiveUserName] = useState("");
+  const notification = useRef("");
   let navigate = useNavigate();
+
+  const activateNotification = (message, styles) => {
+    const stylesList = styles.slice();
+    notification.current.textContent = message;
+    notification.current.classList.add(...stylesList);
+
+    setTimeout(() => {
+      notification.current.classList.remove(...stylesList);
+      notification.current.textContent = "";
+    }, 5000);
+  };
 
   useEffect(() => {
     if (user) {
@@ -37,6 +49,9 @@ function App() {
     const newNote = await services.createNote(obj);
     setNotes((notes = notes.concat(newNote)));
     noteToUpdate = "";
+    const message = "Note saved successfully!";
+    const styles = ["visible", "greenBg"];
+    activateNotification(message, styles);
   };
 
   const handleNoteDelete = (id, noteId) => {
@@ -44,7 +59,13 @@ function App() {
       notes.splice(id, 1);
       setNotes([...notes]);
       services.deleteNote(noteId);
+      const message = "Note deleted successfully!";
+      const styles = ["visible", "greenBg"];
+      activateNotification(message, styles);
     } catch (error) {
+      const message = "Can't delete note";
+      const styles = ["visible", "redBg"];
+      activateNotification(message, styles);
       console.error(error.message);
     }
   };
@@ -73,39 +94,67 @@ function App() {
     try {
       await services.handleReg(obj);
 
+      const message =
+        "Registration Successful! You will be redirected to login page in few seconds.";
+      const styles = ["visible", "greenBg"];
+      activateNotification(message, styles);
+
       setTimeout(() => {
         navigate("/login");
-      }, 2000);
+      }, 5000);
     } catch (error) {
+      const styles = ["visible", "redBg"];
       console.log(error.message);
+
+      if (error.message.indexOf(400)) {
+        activateNotification(
+          "User already exists, you will be redirected to login page.",
+          styles
+        );
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 4000);
+      } else {
+        activateNotification(error.message, styles);
+      }
     }
   };
 
   const handleUserLogin = async (obj) => {
-    const request = await services.handleLogin(obj);
     try {
+      const request = await services.handleLogin(obj);
       setUser(request);
       services.setToken(request.token);
       window.sessionStorage.setItem("user", JSON.stringify(request));
 
+      const message = "Successful! You will be redirected to your dashboard.";
+      const styles = ["visible", "greenBg"];
+      activateNotification(message, styles);
+
       setTimeout(() => {
         navigate("/user-page");
-      }, 2000);
+      }, 3000);
     } catch (error) {
-      console.log(error.message);
+      const styles = ["visible", "redBg"];
+      activateNotification("Invalid credentials provided", styles);
     }
   };
 
   const handleLogout = () => {
     window.sessionStorage.clear();
     setUser("");
+
+    const styles = ["visible", "greenBg"];
+    activateNotification("👋🏽 see you again!", styles);
     setTimeout(() => {
       navigate("/login");
-    }, 1000);
+    }, 2000);
   };
 
   return (
     <div className="App">
+      <div id="slide" ref={notification}></div>
       <div>
         <Routes>
           <Route path="/login" element={<Login login={handleUserLogin} />} />
@@ -139,7 +188,10 @@ function App() {
           />
         </Routes>
       </div>
-      <div></div>
+      <footer id="dev">
+        <span>App developed by</span>
+        <Link to="https://github.com/Abi0l9/Notes_App.git">Al-Khalifah😍</Link>
+      </footer>
     </div>
   );
 }
