@@ -247,4 +247,5 @@ and can also be accessed through the deployed url at:
     }
   ```
 
+#### N.B: Apart from register and login routes, other routes require JWT token that is returned when the user logged in.
 Tests can be found in `./tests` directory.
