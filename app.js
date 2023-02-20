@@ -25,7 +25,7 @@ app.use(middleware.requestLogger);
 app.get("", (request, response) => {
   return response
     .status(200)
-    .json({ message: "Welocome to Notes App Homepage" });
+    .json({ message: "Welcome to Notes App Homepage" });
 });
 
 app.use(middleware.tokenExtractor);
