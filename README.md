@@ -246,6 +246,6 @@ and can also be accessed through the deployed url at:
     "message": "Deleted Successfully"
     }
   ```
-
+- deployed at: https://rich-tan-sheep-hose.cyclic.app/
 #### N.B: Apart from register and login routes, other routes require JWT token that is returned when the user logged in.
 Tests can be found in `./tests` directory.
